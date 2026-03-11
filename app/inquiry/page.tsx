@@ -31,15 +31,23 @@ export default function InquiryPage() {
   const sendToWhatsApp = async () => {
     if (cart.length === 0) return
     setLoading(true)
-    const res = await fetch('/api/inquiry', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: cart })
-    })
-    const { code } = await res.json()
-    const url = `${window.location.origin}/q/${code}`
-    const msg = `Hi! I'm interested in these products. Please check my inquiry list and quote me your best price: ${url}`
-    window.location.href = `https://wa.me/8615373932172?text=${encodeURIComponent(msg)}`
+    try {
+      const res = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart })
+      })
+      if (!res.ok) {
+        throw new Error('Failed to create inquiry')
+      }
+      const { code } = await res.json()
+      const msg = `Hi! I'm interested in these products. Please check my inquiry list and quote me your best price: ${code}`
+      window.location.href = `https://wa.me/8615373932172?text=${encodeURIComponent(msg)}`
+    } catch (error) {
+      console.error('Error:', error)
+      alert('Failed to send inquiry. Please try again.')
+      setLoading(false)
+    }
   }
 
   return (
