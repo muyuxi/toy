@@ -13,19 +13,19 @@ export async function GET(req: Request, { params }: { params: { code: string } }
     const product = productsStore.getByItemNo(item.item_no)
 
     return {
-      'Item No': item.item_no,
+      'Item_No': item.item_no,
       'Category': product?.category || '',
-      'Color': item.color,
+      'Base_Price': product?.base_price || '',
+      'Colors': item.color,
       'Options': item.options.join(', '),
-      'Quantity': item.qty,
-      'Unit Price ($)': item.price.toFixed(2),
-      'Subtotal ($)': (item.price * item.qty).toFixed(2),
+      'Features': product?.features || '',
       'GW': product?.gw || '',
       'NW': product?.nw || '',
       'Dimensions': product?.dimensions || '',
       'CBM': product?.cbm || '',
-      'Loading Qty': product?.load_qty || '',
-      'Your Quote (¥)': ''
+      'Load_Qty': product?.load_qty || '',
+      'Quantity': item.qty,
+      'Total_Price': (item.price * item.qty).toFixed(2)
     }
   })
 
@@ -33,19 +33,19 @@ export async function GET(req: Request, { params }: { params: { code: string } }
   const totalAmount = items.reduce((sum: number, item: any) => sum + item.price * item.qty, 0)
 
   rows.push({
-    'Item No': 'TOTAL',
+    'Item_No': 'TOTAL',
     'Category': '',
-    'Color': '',
+    'Base_Price': '',
+    'Colors': '',
     'Options': '',
-    'Quantity': totalQty,
-    'Unit Price (¥)': '',
-    'Subtotal (¥)': totalAmount.toFixed(2),
+    'Features': '',
     'GW': '',
     'NW': '',
     'Dimensions': '',
     'CBM': '',
-    'Loading Qty': '',
-    'Your Quote (¥)': ''
+    'Load_Qty': '',
+    'Quantity': totalQty,
+    'Total_Price': totalAmount.toFixed(2)
   })
 
   const ws = XLSX.utils.json_to_sheet(rows)
