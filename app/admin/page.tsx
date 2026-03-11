@@ -13,6 +13,12 @@ export default function AdminPage() {
     loadProducts()
   }, [])
 
+  const deleteProduct = async (itemNo: string) => {
+    if (!confirm(`确定删除产品 ${itemNo}?`)) return
+    await fetch(`/api/admin/products?item_no=${itemNo}`, { method: 'DELETE' })
+    loadProducts()
+  }
+
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Product Management</h1>
@@ -41,7 +47,8 @@ export default function AdminPage() {
                   </span>
                 </td>
                 <td className="p-3">
-                  <button onClick={() => setModal(p.item_no)} className="text-blue-600 hover:underline">Manage Images</button>
+                  <button onClick={() => setModal(p.item_no)} className="text-blue-600 hover:underline mr-3">Manage Images</button>
+                  <button onClick={() => deleteProduct(p.item_no)} className="text-red-600 hover:underline">Delete</button>
                 </td>
               </tr>
             ))}

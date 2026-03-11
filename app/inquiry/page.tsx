@@ -43,35 +43,42 @@ export default function InquiryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-32">
-      <header className="bg-white shadow-sm sticky top-0 z-10">
+    <div className="min-h-screen bg-background pb-32">
+      {/* 顶部导航 */}
+      <header className="bg-primary text-white shadow-clay sticky top-0 z-10 border-b-4 border-primary/80">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-4">
-          <button onClick={() => router.back()} className="text-blue-600">←</button>
-          <h1 className="text-2xl font-bold">Inquiry List</h1>
+          <button onClick={() => router.back()} className="text-white text-2xl cursor-pointer hover:opacity-80 transition-opacity duration-200">←</button>
+          <h1 className="text-2xl font-heading font-bold">Inquiry List</h1>
         </div>
       </header>
 
       <div className="max-w-2xl mx-auto p-4">
         {cart.length === 0 ? (
-          <div className="text-center py-12 text-gray-500">Your inquiry list is empty</div>
+          <div className="text-center py-20">
+            <div className="text-6xl mb-4">🛒</div>
+            <p className="text-text/60 text-lg font-medium">Your inquiry list is empty</p>
+            <button onClick={() => router.push('/')} className="mt-6 px-8 py-4 bg-primary text-white rounded-clay font-bold shadow-clay hover:shadow-clay-sm transition-all duration-200 border-3 border-primary/80 cursor-pointer">
+              Browse Products
+            </button>
+          </div>
         ) : (
           <>
             {cart.map((item, i) => (
-              <div key={i} className="bg-white rounded-lg p-4 mb-3 flex gap-4">
-                <img src={item.image || '/placeholder.png'} className="w-20 h-20 object-cover rounded" />
+              <div key={i} className="bg-white rounded-clay p-4 mb-3 shadow-clay flex gap-4 border-3 border-white">
+                <img src={item.image || '/placeholder.svg'} className="w-24 h-24 object-cover rounded-clay border-3 border-gray-200" />
                 <div className="flex-1">
-                  <p className="font-semibold">{item.item_no}</p>
-                  <p className="text-sm text-gray-600">Color: {item.color}</p>
-                  {item.options.length > 0 && <p className="text-sm text-gray-600">Options: {item.options.join(', ')}</p>}
-                  <div className="flex items-center gap-2 mt-2">
-                    <button onClick={() => updateQty(i, -1)} className="w-8 h-8 border rounded">-</button>
-                    <span className="w-12 text-center">{item.qty}</span>
-                    <button onClick={() => updateQty(i, 1)} className="w-8 h-8 border rounded">+</button>
+                  <p className="font-heading font-bold text-text">{item.item_no}</p>
+                  <p className="text-sm text-text/60 font-medium">Color: {item.color}</p>
+                  {item.options.length > 0 && <p className="text-xs text-text/50">+{item.options.join(', ')}</p>}
+                  <div className="flex items-center gap-3 mt-3">
+                    <button onClick={() => updateQty(i, -1)} className="w-8 h-8 bg-background rounded-clay font-bold hover:bg-primary hover:text-white transition-all duration-200 shadow-clay-sm border-2 border-gray-200 cursor-pointer">-</button>
+                    <span className="w-10 text-center font-bold text-text">{item.qty}</span>
+                    <button onClick={() => updateQty(i, 1)} className="w-8 h-8 bg-background rounded-clay font-bold hover:bg-primary hover:text-white transition-all duration-200 shadow-clay-sm border-2 border-gray-200 cursor-pointer">+</button>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-bold text-lg">${(item.price * item.qty).toFixed(2)}</p>
-                  <button onClick={() => removeItem(i)} className="text-red-500 text-sm mt-2">🗑️ Remove</button>
+                <div className="text-right flex flex-col justify-between">
+                  <p className="font-heading font-bold text-lg text-accent">${(item.price * item.qty).toFixed(2)}</p>
+                  <button onClick={() => removeItem(i)} className="text-red-500 text-sm cursor-pointer hover:text-red-600 transition-colors duration-200">🗑️</button>
                 </div>
               </div>
             ))}
@@ -80,15 +87,17 @@ export default function InquiryPage() {
       </div>
 
       {cart.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg">
+        <div className="fixed bottom-0 left-0 right-0 bg-white shadow-clay border-t-4 border-primary/20">
           <div className="max-w-2xl mx-auto p-4">
-            <div className="flex justify-between mb-3">
-              <span className="text-gray-600">Total Qty: {totalQty}</span>
-              <span className="text-2xl font-bold">${total.toFixed(2)}</span>
+            <div className="flex justify-between items-center mb-4">
+              <div>
+                <p className="text-sm text-text/60 font-medium">Total Items: {totalQty}</p>
+                <p className="text-4xl font-heading font-bold text-accent">${total.toFixed(2)}</p>
+              </div>
+              <button onClick={sendToWhatsApp} disabled={loading} className="px-8 py-4 bg-green-500 text-white rounded-clay font-heading font-bold text-lg shadow-clay hover:shadow-clay-sm transition-all duration-200 disabled:opacity-50 border-3 border-green-600 cursor-pointer">
+                {loading ? '⏳ Generating...' : '💬 Send to WhatsApp'}
+              </button>
             </div>
-            <button onClick={sendToWhatsApp} disabled={loading} className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold text-lg disabled:bg-gray-400">
-              {loading ? 'Generating...' : '📱 Send to WhatsApp'}
-            </button>
           </div>
         </div>
       )}
