@@ -1,0 +1,101 @@
+{
+  "products": [
+    {
+      "item_no": "TOY001",
+      "category": "Ride-on Cars",
+      "base_price": 45.5,
+      "colors": "Red,Blue,Pink",
+      "options": "Remote:20\nLeather-seat:15",
+      "features": "Electric ride-on car with music",
+      "gw": "5.2kg",
+      "nw": "4.5kg",
+      "dimensions": "80x40x50cm",
+      "cbm": "0.16",
+      "load_qty": "200",
+      "id": 1,
+      "images": [
+        {
+          "image_path": "/uploads/TOY001_1773225929295_0.jpg",
+          "is_main": 1,
+          "sort_order": 0
+        }
+      ]
+    },
+    {
+      "item_no": "TOY002",
+      "category": "Baby Walkers",
+      "base_price": 28,
+      "colors": "Green,Yellow",
+      "options": "Music:8\nLights:5",
+      "features": "Multi-function baby walker",
+      "gw": "3.5kg",
+      "nw": "3.0kg",
+      "dimensions": "60x50x55cm",
+      "cbm": "0.165",
+      "load_qty": "180",
+      "id": 2,
+      "images": [
+        {
+          "image_path": "/uploads/TOY002_1773225610196_0.jpg",
+          "is_main": 1,
+          "sort_order": 0
+        }
+      ]
+    },
+    {
+      "item_no": "TOY003",
+      "category": "Ride-on Cars",
+      "base_price": 52,
+      "colors": "Black,White,Red",
+      "options": "Remote:20\nLED-lights:12\nStorage:10",
+      "features": "Premium electric car",
+      "gw": "6.0kg",
+      "nw": "5.2kg",
+      "dimensions": "85x45x52cm",
+      "cbm": "0.2",
+      "load_qty": "160",
+      "id": 3,
+      "images": []
+    },
+    {
+      "item_no": "TOY004",
+      "category": "nihao",
+      "base_price": 99,
+      "colors": "Black,White,Red",
+      "options": "Remote:20\nLED-lights:12\nStorage:10",
+      "features": "Premium electric car",
+      "gw": "6.0kg",
+      "nw": "5.2kg",
+      "dimensions": "85x45x52cm",
+      "cbm": "0.2",
+      "load_qty": "160",
+      "id": 4,
+      "images": []
+    },
+    {
+      "item_no": "TOY005",
+      "category": "nihao",
+      "base_price": 199,
+      "colors": "A",
+      "options": "Remote:20\nLED-lights:12\nStorage:10",
+      "features": "Premium electric car",
+      "gw": "6.0kg",
+      "nw": "5.2kg",
+      "dimensions": "85x45x52cm",
+      "cbm": "0.2",
+      "load_qty": "160",
+      "id": 5,
+      "images": []
+    }
+  ],
+  "inquiries": [
+    {
+      "id": 1,
+      "code": "VBJXG1",
+      "data": "[{\"item_no\":\"TOY001\",\"color\":\"Blue\",\"options\":[\"Remote\"],\"qty\":1,\"price\":65.5,\"image\":\"/uploads/TOY001_1773224241308_0.jpg\"}]",
+      "created_at": "2026-03-11T10:17:56.970Z"
+    }
+  ],
+  "nextProductId": 6,
+  "nextInquiryId": 2
+}
