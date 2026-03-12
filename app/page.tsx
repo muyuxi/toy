@@ -12,6 +12,7 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [cartCount, setCartCount] = useState(0)
   const [banners, setBanners] = useState<any[]>([])
+  const [currentBanner, setCurrentBanner] = useState(0)
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
 
@@ -37,6 +38,14 @@ export default function HomePage() {
       setCartCount(cart.length)
     })
   }, [])
+
+  useEffect(() => {
+    if (banners.length <= 1) return
+    const timer = setInterval(() => {
+      setCurrentBanner(prev => (prev + 1) % banners.length)
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [banners.length])
 
   useEffect(() => {
     let filtered = allProducts
@@ -83,12 +92,21 @@ export default function HomePage() {
 
       {/* Banner轮播 */}
       {banners.length > 0 && (
-        <div className="relative h-48 md:h-64 overflow-x-auto scrollbar-hide flex snap-x snap-mandatory">
-          {banners.map((b, i) => (
-            <Link key={i} href={`/products/${b.item_no}`} className="min-w-full snap-center cursor-pointer">
-              <img src={b.image} alt="" className="w-full h-48 md:h-64 object-cover" />
-            </Link>
-          ))}
+        <div className="relative h-72 md:h-96 overflow-hidden">
+          <div className="flex transition-transform duration-500 ease-out" style={{ transform: `translateX(-${currentBanner * 100}%)` }}>
+            {banners.map((b, i) => (
+              <Link key={i} href={`/products/${b.item_no}`} className="min-w-full cursor-pointer">
+                <img src={b.image} alt="" className="w-full h-72 md:h-96 object-cover" />
+              </Link>
+            ))}
+          </div>
+          {banners.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {banners.map((_, i) => (
+                <button key={i} onClick={() => setCurrentBanner(i)} className={`w-2 h-2 rounded-full transition-all ${i === currentBanner ? 'bg-white w-6' : 'bg-white/50'}`} />
+              ))}
+            </div>
+          )}
         </div>
       )}
 
