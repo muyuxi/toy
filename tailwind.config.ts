@@ -5,11 +5,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#4F46E5',
-        secondary: '#818CF8',
-        accent: '#F97316',
-        background: '#EEF2FF',
-        text: '#1E1B4B',
+        primary: '#000000',
+        secondary: '#666666',
+        accent: '#000000',
+        background: '#FFFFFF',
+        text: '#000000',
       },
       fontFamily: {
         sans: ['Nunito Sans', 'sans-serif'],

@@ -21,6 +21,15 @@ export default function AdminPage() {
     loadProducts()
   }
 
+  const toggleBanner = async (itemNo: string, isBanner: boolean) => {
+    await fetch('/api/admin/banner', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ item_no: itemNo, is_banner: !isBanner })
+    })
+    loadProducts()
+  }
+
   const downloadInquiry = () => {
     if (!inquiryCode.trim()) {
       alert('请输入询价码')
@@ -93,6 +102,7 @@ export default function AdminPage() {
               <th className="p-3 text-left whitespace-nowrap">价格</th>
               <th className="p-3 text-left whitespace-nowrap">颜色</th>
               <th className="p-3 text-left whitespace-nowrap">图片</th>
+              <th className="p-3 text-left whitespace-nowrap">轮播</th>
               <th className="p-3 text-left whitespace-nowrap">操作</th>
             </tr>
           </thead>
@@ -107,6 +117,14 @@ export default function AdminPage() {
                   <span className={`px-2 py-1 rounded text-sm whitespace-nowrap ${p.image_count > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                     {p.image_count || 0} 张
                   </span>
+                </td>
+                <td className="p-3">
+                  <button
+                    onClick={() => toggleBanner(p.item_no, p.is_banner)}
+                    className={`px-2 py-1 rounded text-sm whitespace-nowrap ${p.is_banner ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+                  >
+                    {p.is_banner ? '已设置' : '设为轮播'}
+                  </button>
                 </td>
                 <td className="p-3 whitespace-nowrap">
                   <button onClick={() => setModal(p.item_no)} className="text-blue-600 hover:underline mr-3">管理图片</button>

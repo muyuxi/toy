@@ -24,6 +24,7 @@ interface Product {
   cbm: string;
   load_qty: string;
   images: ProductImage[];
+  is_banner?: boolean;
 }
 
 interface Inquiry {
@@ -143,6 +144,16 @@ export const productsStore = {
     const product = data.products.find(p => p.item_no === itemNo);
     if (product) {
       product.images = product.images.filter(img => img.image_path !== imagePath);
+      writeData(data);
+    }
+  },
+
+  // 设置轮播
+  updateBanner(itemNo: string, isBanner: boolean) {
+    const data = readData();
+    const product = data.products.find(p => p.item_no === itemNo);
+    if (product) {
+      product.is_banner = isBanner;
       writeData(data);
     }
   },

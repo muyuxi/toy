@@ -56,16 +56,16 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gray-50">
       {/* 顶部导航 */}
-      <header className="bg-primary text-white shadow-clay sticky top-0 z-20 border-b-4 border-primary/80">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-3">
-            <h1 className="text-2xl font-heading font-bold">Kids Ride-On Toys</h1>
+            <h1 className="text-xl font-heading font-semibold text-gray-900">Kids Ride-On Toys</h1>
             <Link href="/inquiry" className="relative cursor-pointer">
-              <span className="text-3xl">🛒</span>
+              <span className="text-2xl">🛒</span>
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-accent text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold shadow-clay-sm border-2 border-white">
+                <span className="absolute -top-1 -right-1 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">
                   {cartCount}
                 </span>
               )}
@@ -73,10 +73,10 @@ export default function HomePage() {
           </div>
           <input
             type="text"
-            placeholder="🔍 Search by Item No..."
+            placeholder="Search by Item No..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-5 py-3 rounded-clay text-text shadow-clay-sm focus:outline-none focus:ring-4 focus:ring-secondary/50 border-3 border-white/50 font-medium transition-all duration-200"
+            className="w-full px-4 py-2 rounded-lg border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-400 transition-colors"
           />
         </div>
       </header>
@@ -93,20 +93,20 @@ export default function HomePage() {
       )}
 
       {/* 筛选标签 */}
-      <div className="bg-white shadow-sm sticky top-[88px] z-10">
+      <div className="bg-white border-b border-gray-200 sticky top-[88px] z-10">
         <div className="px-4 py-3 border-b border-gray-100">
           <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
-            <button onClick={() => setSelectedCategory('')} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer ${!selectedCategory ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>All</button>
+            <button onClick={() => setSelectedCategory('')} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${!selectedCategory ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>All</button>
             {categories.map(cat => (
-              <button key={cat} onClick={() => setSelectedCategory(cat)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer ${selectedCategory === cat ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>{cat}</button>
+              <button key={cat} onClick={() => setSelectedCategory(cat)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${selectedCategory === cat ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>{cat}</button>
             ))}
           </div>
         </div>
         <div className="px-4 py-3">
           <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
-            <button onClick={() => setSelectedColor('')} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer ${!selectedColor ? 'bg-secondary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>All Colors</button>
+            <button onClick={() => setSelectedColor('')} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${!selectedColor ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>All Colors</button>
             {colors.map(col => (
-              <button key={col} onClick={() => setSelectedColor(col)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer ${selectedColor === col ? 'bg-secondary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>{col}</button>
+              <button key={col} onClick={() => setSelectedColor(col)} className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${selectedColor === col ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>{col}</button>
             ))}
           </div>
         </div>
@@ -116,30 +116,30 @@ export default function HomePage() {
       <main className="max-w-7xl mx-auto p-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map(p => (
-            <Link key={p.id} href={`/products/${p.item_no}`} className="bg-white rounded-clay shadow-clay hover:shadow-clay-sm transition-all duration-200 overflow-hidden group border-3 border-white hover:border-primary/30 cursor-pointer">
+            <Link key={p.id} href={`/products/${p.item_no}`} className="bg-white rounded-lg border border-gray-200 hover:border-gray-400 transition-colors overflow-hidden group cursor-pointer">
               <div className="relative overflow-hidden">
-                <img src={p.image || '/placeholder.svg'} alt={p.item_no} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
-                <div className="absolute top-3 right-3 bg-accent text-white text-sm px-3 py-1 rounded-clay font-bold shadow-clay-sm border-2 border-white">
+                <img src={p.image || '/placeholder.svg'} alt={p.item_no} className="w-full h-48 object-cover" />
+                <div className="absolute top-2 right-2 bg-black text-white text-xs px-2 py-1 rounded font-medium">
                   ${p.base_price}
                 </div>
               </div>
-              <div className="p-4">
-                <p className="font-heading font-bold text-text truncate text-lg">{p.item_no}</p>
-                <p className="text-sm text-text/60 font-medium">{p.category}</p>
+              <div className="p-3">
+                <p className="font-heading font-semibold text-gray-900 truncate">{p.item_no}</p>
+                <p className="text-sm text-gray-500">{p.category}</p>
               </div>
             </Link>
           ))}
         </div>
         {products.length < allProducts.length && (
-          <button onClick={loadMore} disabled={loading} className="w-full mt-6 py-4 bg-primary text-white rounded-clay font-heading font-bold text-lg shadow-clay hover:shadow-clay-sm transition-all duration-200 border-3 border-primary/80 cursor-pointer disabled:opacity-50">
+          <button onClick={loadMore} disabled={loading} className="w-full mt-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-colors cursor-pointer disabled:opacity-50">
             {loading ? 'Loading...' : 'Load More'}
           </button>
         )}
       </main>
 
-      <Link href="/inquiry" className="fixed bottom-6 right-6 bg-accent text-white w-16 h-16 rounded-clay flex items-center justify-center shadow-clay z-30 border-3 border-accent/80 hover:scale-105 transition-transform duration-200 cursor-pointer">
+      <Link href="/inquiry" className="fixed bottom-6 right-6 bg-black text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-30 hover:bg-gray-800 transition-colors cursor-pointer">
         🛒
-        {cartCount > 0 && <span className="absolute -top-2 -right-2 bg-primary text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold shadow-clay-sm border-2 border-white">{cartCount}</span>}
+        {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">{cartCount}</span>}
       </Link>
     </div>
   )
