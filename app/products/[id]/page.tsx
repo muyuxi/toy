@@ -31,7 +31,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     return { name: name.trim(), price: parseFloat(price) }
   }) : []
 
-  const price = color ? product.base_price + opts.filter((o: any) => options.includes(o.name)).reduce((sum: number, o: any) => sum + o.price, 0) : 0
+  const price = color ? parseFloat(product.base_price) + opts.filter((o: any) => options.includes(o.name)).reduce((sum: number, o: any) => sum + o.price, 0) : 0
 
   const addToCart = () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
