@@ -41,8 +41,23 @@ export default function InquiryPage() {
         throw new Error('Failed to create inquiry')
       }
       const { code } = await res.json()
-      const msg = `Hi! I'm interested in these products. Please check my inquiry list and quote me your best price: ${code}`
-      window.location.href = `https://wa.me/8615373932172?text=${encodeURIComponent(msg)}`
+
+      const lines = ['Hi! I\'m interested in these products:', '']
+      cart.forEach((item, i) => {
+        lines.push(`${i + 1}. ${item.item_no}`)
+        lines.push(`   Color: ${item.color}`)
+        if (item.options.length > 0) {
+          lines.push(`   Options: ${item.options.join(', ')}`)
+        }
+        lines.push(`   Qty: ${item.qty}`)
+        lines.push(`   Price: $${(item.price * item.qty).toFixed(2)}`)
+        lines.push('')
+      })
+      lines.push(`Total: $${total.toFixed(2)}`)
+      lines.push('')
+      lines.push(`Inquiry Code: ${code}`)
+
+      window.location.href = `https://wa.me/8615373932172?text=${encodeURIComponent(lines.join('\n'))}`
     } catch (error) {
       console.error('Error:', error)
       alert('Failed to send inquiry. Please try again.')
