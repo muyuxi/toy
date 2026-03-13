@@ -24,13 +24,13 @@ export async function POST(req: Request) {
     const optionsStr = row['Options']?.toString().trim() || ''
     const options = optionsStr ? optionsStr.split(' ').filter(Boolean) : []
 
-    const existing = productsStore.getByItemNo(itemNo)
+    const existing = await productsStore.getByItemNo(itemNo)
     if (existing) {
       // 更新已有产品（保留图片）
-      productsStore.delete(itemNo)
+      await productsStore.delete(itemNo)
     }
 
-    productsStore.create({
+    await productsStore.create({
       item_no: itemNo,
       category: row['Category']?.toString().trim() || '',
       base_price: basePrice,

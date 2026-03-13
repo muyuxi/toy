@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   const { items } = await req.json()
   const code = generateCode()
 
-  inquiriesStore.create(code, JSON.stringify(items))
+  await inquiriesStore.create(code, JSON.stringify(items))
 
   return NextResponse.json({ code })
 }

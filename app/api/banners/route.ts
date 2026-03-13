@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export async function GET() {
-  const products = productsStore.getAll()
+  const products = await productsStore.getAll()
   const banners = products
     .filter(p => p.is_banner && p.images.length > 0)
     .map(p => ({

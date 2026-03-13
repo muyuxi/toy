@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { productsStore } from '@/lib/store'
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
-  const product = productsStore.getByItemNo(params.id)
+  const product = await productsStore.getByItemNo(params.id)
   if (!product) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 })
   }

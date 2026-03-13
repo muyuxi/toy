@@ -11,7 +11,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
       await unlink(path.join(process.cwd(), 'public', imagePath))
     } catch (e) {}
 
-    productsStore.deleteImage(itemNo, imagePath)
+    await productsStore.deleteImage(itemNo, imagePath)
   }
 
   return NextResponse.json({ success: true })

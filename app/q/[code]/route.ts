@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 
 export async function GET(req: Request, { params }: { params: { code: string } }) {
-  const inquiry = inquiriesStore.getByCode(params.code)
+  const inquiry = await inquiriesStore.getByCode(params.code)
 
   if (!inquiry) return new NextResponse('Not found', { status: 404 })
 
@@ -35,7 +35,7 @@ export async function GET(req: Request, { params }: { params: { code: string } }
   // 添加数据行
   let rowIndex = 2
   for (const item of items) {
-    const product = productsStore.getByItemNo(item.item_no)
+    const product = await productsStore.getByItemNo(item.item_no)
 
     worksheet.addRow({
       item_no: item.item_no,

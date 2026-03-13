@@ -10,7 +10,7 @@ export async function POST(req: Request) {
 
   await mkdir(path.join(process.cwd(), 'public', 'uploads'), { recursive: true })
 
-  const product = productsStore.getByItemNo(itemNo)
+  const product = await productsStore.getByItemNo(itemNo)
   const currentCount = product?.images.length || 0
 
   for (let i = 0; i < images.length; i++) {
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     const filepath = path.join(process.cwd(), 'public', 'uploads', filename)
     await writeFile(filepath, buffer)
 
-    productsStore.addImage(itemNo, {
+    await productsStore.addImage(itemNo, {
       image_path: `/uploads/${filename}`,
       is_main: currentCount === 0 && i === 0 ? 1 : 0,
       sort_order: currentCount + i
@@ -38,7 +38,7 @@ export async function DELETE(req: Request) {
   const imagePath = searchParams.get('image_path')
 
   if (itemNo && imagePath) {
-    productsStore.deleteImage(itemNo, imagePath)
+    await productsStore.deleteImage(itemNo, imagePath)
   }
   return NextResponse.json({ success: true })
 }

@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export async function GET() {
-  const products = productsStore.getAll()
+  const products = await productsStore.getAll()
 
   // 添加主图片字段
   const productsWithImage = products.map(p => ({
