@@ -229,7 +229,12 @@ export const inquiriesStore = {
 // FAQs API
 const FAQ_FILE = path.join(process.cwd(), 'public', 'faqs.json');
 
-function readFaqs() {
+interface FaqData {
+  faqs: FAQ[];
+  nextId: number;
+}
+
+function readFaqs(): FaqData {
   try {
     if (!fs.existsSync(FAQ_FILE)) {
       fs.writeFileSync(FAQ_FILE, JSON.stringify({ faqs: [], nextId: 1 }, null, 2));
@@ -242,7 +247,7 @@ function readFaqs() {
   }
 }
 
-function writeFaqs(data: { faqs: FAQ[], nextId: number }) {
+function writeFaqs(data: FaqData) {
   try {
     fs.writeFileSync(FAQ_FILE, JSON.stringify(data, null, 2));
   } catch (error) {
