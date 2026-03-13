@@ -1,8 +1,14 @@
 {
   "products": [],
   "inquiries": [],
-  "faqs": [],
+  "faqs": [
+    {
+      "id": 1,
+      "question": "其实我",
+      "answer": "轻武器 "
+    }
+  ],
   "nextProductId": 1,
   "nextInquiryId": 1,
-  "nextFaqId": 1
+  "nextFaqId": 2
 }

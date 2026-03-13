@@ -1,7 +1,0 @@
-| Item_No | Category     | Base_Price | Colors          | Options                            | Features                        | GW    | NW    | Dimensions | CBM   | Load_Qty |
-| ------- | ------------ | ---------- | --------------- | ---------------------------------- | ------------------------------- | ----- | ----- | ---------- | ----- | -------- |
-| TOY001  | Ride-on Cars | 45.5       | Red,Blue,Pink   | Remote:20 Leather-seat:15          | Electric ride-on car with music | 5.2kg | 4.5kg | 80x40x50cm | 0.16  | 200      |
-| TOY002  | Baby Walkers | 28         | Green,Yellow    | Music:8 Lights:5                   | Multi-function baby walker      | 3.5kg | 3.0kg | 60x50x55cm | 0.165 | 180      |
-| TOY003  | Ride-on Cars | 52         | Black,White,Red | Remote:20 LED-lights:12 Storage:10 | Premium electric car            | 6.0kg | 5.2kg | 85x45x52cm | 0.2   | 160      |
-| TOY004  | nihao        | 99         | Black,White,Red | Remote:20 LED-lights:12 Storage:10 | Premium electric car            | 6.0kg | 5.2kg | 85x45x52cm | 0.2   | 160      |
-| TOY005  | nihao        | 199        | A               | Remote:20 LED-lights:12 Storage:10 | Premium electric car            | 6.0kg | 5.2kg | 85x45x52cm | 0.2   | 160      |
