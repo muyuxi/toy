@@ -64,7 +64,7 @@ export async function GET(req: Request, { params }: { params: { code: string } }
         if (fs.existsSync(fullPath)) {
           const imageBuffer = fs.readFileSync(fullPath)
           const imageId = workbook.addImage({
-            buffer: new Uint8Array(imageBuffer),
+            buffer: imageBuffer as any,
             extension: path.extname(imagePath).slice(1) as any
           })
           worksheet.addImage(imageId, {
