@@ -73,7 +73,12 @@ function readData(): DataStore {
 
 // 写入数据
 function writeData(data: DataStore) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+  } catch (error) {
+    console.error('Failed to write data:', error);
+    throw new Error('无法保存数据，可能是文件系统权限问题');
+  }
 }
 
 // Products API

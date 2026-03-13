@@ -77,15 +77,25 @@ export default function AdminPage() {
       alert('请填写问题和答案')
       return
     }
-    await fetch('/api/admin/faqs', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question: newQuestion, answer: newAnswer })
-    })
-    setNewQuestion('')
-    setNewAnswer('')
-    setShowFaqForm(false)
-    loadFaqs()
+    try {
+      const res = await fetch('/api/admin/faqs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: newQuestion, answer: newAnswer })
+      })
+      if (!res.ok) {
+        const error = await res.text()
+        alert('保存失败: ' + error)
+        return
+      }
+      setNewQuestion('')
+      setNewAnswer('')
+      setShowFaqForm(false)
+      loadFaqs()
+    } catch (error) {
+      console.error('添加FAQ失败:', error)
+      alert('保存失败，请查看控制台错误信息')
+    }
   }
 
   const deleteFaq = async (id: number) => {
