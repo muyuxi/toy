@@ -11,7 +11,7 @@ export async function GET() {
   // 添加主图片字段
   const productsWithImage = products.map(p => ({
     ...p,
-    image: p.images.find(img => img.is_main === 1)?.image_path || p.images[0]?.image_path || null
+    image: p.images.find((img: any) => img.is_main === 1)?.image_path || p.images[0]?.image_path || null
   }))
 
   return NextResponse.json(productsWithImage)

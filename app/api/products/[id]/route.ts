@@ -9,6 +9,6 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
   return NextResponse.json({
     ...product,
-    images: product.images.sort((a, b) => a.sort_order - b.sort_order).map(img => img.image_path)
+    images: product.images.sort((a: any, b: any) => a.sort_order - b.sort_order).map((img: any) => img.image_path)
   })
 }

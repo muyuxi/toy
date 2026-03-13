@@ -11,7 +11,7 @@ export async function GET() {
     .filter(p => p.is_banner && p.images.length > 0)
     .map(p => ({
       item_no: p.item_no,
-      image: p.images.find(img => img.is_main === 1)?.image_path || p.images[0]?.image_path
+      image: p.images.find((img: any) => img.is_main === 1)?.image_path || p.images[0]?.image_path
     }))
   return NextResponse.json(banners)
 }
