@@ -227,31 +227,51 @@ export const inquiriesStore = {
 };
 
 // FAQs API
+const FAQ_FILE = path.join(process.cwd(), 'public', 'faqs.json');
+
+function readFaqs() {
+  try {
+    if (!fs.existsSync(FAQ_FILE)) {
+      fs.writeFileSync(FAQ_FILE, JSON.stringify({ faqs: [], nextId: 1 }, null, 2));
+    }
+    const data = fs.readFileSync(FAQ_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('读取FAQ失败:', error);
+    return { faqs: [], nextId: 1 };
+  }
+}
+
+function writeFaqs(data: { faqs: FAQ[], nextId: number }) {
+  try {
+    fs.writeFileSync(FAQ_FILE, JSON.stringify(data, null, 2));
+  } catch (error) {
+    console.error('写入FAQ失败:', error);
+    throw new Error('无法保存FAQ数据');
+  }
+}
+
 export const faqsStore = {
   getAll() {
-    const data = readData();
+    const data = readFaqs();
     return data.faqs || [];
   },
 
   create(question: string, answer: string) {
-    const data = readData();
-    if (!data.faqs) data.faqs = [];
-    if (!data.nextFaqId) data.nextFaqId = 1;
+    const data = readFaqs();
     const newFaq: FAQ = {
-      id: data.nextFaqId++,
+      id: data.nextId++,
       question,
       answer
     };
     data.faqs.push(newFaq);
-    writeData(data);
+    writeFaqs(data);
     return newFaq;
   },
 
   delete(id: number) {
-    const data = readData();
-    if (data.faqs) {
-      data.faqs = data.faqs.filter(f => f.id !== id);
-      writeData(data);
-    }
+    const data = readFaqs();
+    data.faqs = data.faqs.filter(f => f.id !== id);
+    writeFaqs(data);
   }
 };

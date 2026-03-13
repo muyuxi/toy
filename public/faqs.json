@@ -1,0 +1,10 @@
+{
+  "faqs": [
+    {
+      "id": 1,
+      "question": "121",
+      "answer": "221"
+    }
+  ],
+  "nextId": 2
+}
