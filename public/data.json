@@ -1,6 +1,16 @@
 {
   "products": [],
   "inquiries": [],
+  "faqs": [],
   "nextProductId": 1,
-  "nextInquiryId": 1
+  "nextInquiryId": 1,
+  "nextFaqId": 1
+}
+{
+  "products": [],
+  "inquiries": [],
+  "faqs": [],
+  "nextProductId": 1,
+  "nextInquiryId": 1,
+  "nextFaqId": 1
 }
