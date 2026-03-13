@@ -71,14 +71,19 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between mb-3">
             <h1 className="text-xl font-heading font-semibold text-text-primary">Kids Ride-On Toys</h1>
-            <Link href="/inquiry" className="relative cursor-pointer">
-              <span className="text-2xl">🛒</span>
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-price text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href="/faq" className="text-text-secondary hover:text-primary transition-colors text-sm font-medium">
+                ❓ FAQ
+              </Link>
+              <Link href="/inquiry" className="relative cursor-pointer">
+                <span className="text-3xl">🛒</span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-price text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </div>
           </div>
           <input
             type="text"
@@ -138,7 +143,7 @@ export default function HomePage() {
               <div className="relative overflow-hidden">
                 <img src={p.image || '/placeholder.svg'} alt={p.item_no} className="w-full h-48 object-cover" />
                 <div className="absolute top-2 right-2 bg-price text-white text-sm font-bold px-2 py-1 rounded">
-                  ${p.base_price}
+                  ¥{p.base_price}
                 </div>
               </div>
               <div className="p-3">
@@ -155,9 +160,9 @@ export default function HomePage() {
         )}
       </main>
 
-      <Link href="/inquiry" className="fixed bottom-6 right-6 bg-gradient-to-br from-primary to-primary-dark text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-30 hover:shadow-xl transition-all cursor-pointer">
-        🛒
-        {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-price text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium">{cartCount}</span>}
+      <Link href="/faq" className="fixed bottom-6 right-6 bg-white/90 backdrop-blur-sm text-primary w-16 py-2 rounded-2xl flex flex-col items-center justify-center shadow-lg z-30 hover:shadow-xl hover:bg-white transition-all cursor-pointer border border-border-light">
+        <span className="text-2xl">❓</span>
+        <span className="text-xs font-medium mt-1">FAQ</span>
       </Link>
     </div>
   )

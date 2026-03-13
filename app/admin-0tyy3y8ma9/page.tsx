@@ -3,16 +3,25 @@ import { useEffect, useState } from 'react'
 
 export default function AdminPage() {
   const [products, setProducts] = useState<any[]>([])
+  const [faqs, setFaqs] = useState<any[]>([])
   const [modal, setModal] = useState<string | null>(null)
   const [inquiryCode, setInquiryCode] = useState('')
   const [uploading, setUploading] = useState(false)
+  const [showFaqForm, setShowFaqForm] = useState(false)
+  const [newQuestion, setNewQuestion] = useState('')
+  const [newAnswer, setNewAnswer] = useState('')
 
   const loadProducts = () => {
     fetch('/api/admin/products').then(r => r.json()).then(setProducts)
   }
 
+  const loadFaqs = () => {
+    fetch('/api/faqs').then(r => r.json()).then(setFaqs)
+  }
+
   useEffect(() => {
     loadProducts()
+    loadFaqs()
   }, [])
 
   const deleteProduct = async (itemNo: string) => {
@@ -60,6 +69,28 @@ export default function AdminPage() {
     }
     setUploading(false)
     e.target.value = ''
+  }
+
+  const addFaq = async () => {
+    if (!newQuestion.trim() || !newAnswer.trim()) {
+      alert('请填写问题和答案')
+      return
+    }
+    await fetch('/api/admin/faqs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: newQuestion, answer: newAnswer })
+    })
+    setNewQuestion('')
+    setNewAnswer('')
+    setShowFaqForm(false)
+    loadFaqs()
+  }
+
+  const deleteFaq = async (id: number) => {
+    if (!confirm('确定删除此问题?')) return
+    await fetch(`/api/admin/faqs?id=${id}`, { method: 'DELETE' })
+    loadFaqs()
   }
 
   return (
@@ -111,7 +142,7 @@ export default function AdminPage() {
               <tr key={p.id} className="border-b border-border-light hover:bg-background">
                 <td className="p-3 font-semibold whitespace-nowrap text-text-primary">{p.item_no}</td>
                 <td className="p-3 whitespace-nowrap text-text-secondary">{p.category}</td>
-                <td className="p-3 whitespace-nowrap text-price font-semibold">${p.base_price}</td>
+                <td className="p-3 whitespace-nowrap text-price font-semibold">¥{p.base_price}</td>
                 <td className="p-3 text-sm text-text-secondary">{p.colors}</td>
                 <td className="p-3">
                   <span className={`px-2 py-1 rounded text-sm whitespace-nowrap ${p.image_count > 0 ? 'bg-green-50 text-success border border-green-200' : 'bg-red-50 text-red-600 border border-red-200'}`}>
@@ -134,6 +165,47 @@ export default function AdminPage() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* FAQ管理 */}
+      <div className="mt-8">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-heading font-bold text-text-primary">常见问题管理</h2>
+          <button onClick={() => setShowFaqForm(!showFaqForm)} className="px-6 py-2 bg-gradient-to-r from-primary to-primary-dark text-white rounded-lg font-semibold hover:shadow-lg transition-all">
+            {showFaqForm ? '取消' : '添加问题'}
+          </button>
+        </div>
+
+        {showFaqForm && (
+          <div className="bg-card rounded-lg p-4 mb-4 border border-border-light">
+            <input type="text" placeholder="问题" value={newQuestion} onChange={(e) => setNewQuestion(e.target.value)} className="w-full px-4 py-2 border border-border rounded-lg mb-3 text-text-primary focus:outline-none focus:ring-2 focus:ring-primary" />
+            <textarea placeholder="答案" value={newAnswer} onChange={(e) => setNewAnswer(e.target.value)} rows={4} className="w-full px-4 py-2 border border-border rounded-lg mb-3 text-text-primary focus:outline-none focus:ring-2 focus:ring-primary" />
+            <button onClick={addFaq} className="px-6 py-2 bg-success text-white rounded-lg font-semibold hover:shadow-lg transition-all">保存</button>
+          </div>
+        )}
+
+        <div className="bg-card rounded-lg border border-border-light overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-background">
+              <tr className="border-b border-border-light">
+                <th className="p-3 text-left text-text-primary font-semibold">问题</th>
+                <th className="p-3 text-left text-text-primary font-semibold">答案</th>
+                <th className="p-3 text-left text-text-primary font-semibold w-24">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {faqs.map(faq => (
+                <tr key={faq.id} className="border-b border-border-light hover:bg-background">
+                  <td className="p-3 text-text-primary font-medium">{faq.question}</td>
+                  <td className="p-3 text-text-secondary text-sm">{faq.answer.substring(0, 50)}...</td>
+                  <td className="p-3">
+                    <button onClick={() => deleteFaq(faq.id)} className="text-red-600 hover:text-red-700 font-medium">删除</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {modal && <ImageModal itemNo={modal} onClose={() => { setModal(null); loadProducts(); }} />}

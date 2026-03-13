@@ -50,10 +50,10 @@ export default function InquiryPage() {
           lines.push(`   Options: ${item.options.join(', ')}`)
         }
         lines.push(`   Qty: ${item.qty}`)
-        lines.push(`   Price: $${(item.price * item.qty).toFixed(2)}`)
+        lines.push(`   Price: ¥${(item.price * item.qty).toFixed(2)}`)
         lines.push('')
       })
-      lines.push(`Total: $${total.toFixed(2)}`)
+      lines.push(`Total: ¥${total.toFixed(2)}`)
       lines.push('')
       lines.push(`Inquiry Code: ${code}`)
 
@@ -100,7 +100,7 @@ export default function InquiryPage() {
                   </div>
                 </div>
                 <div className="text-right flex flex-col justify-between">
-                  <p className="font-heading font-bold text-lg text-price">${(item.price * item.qty).toFixed(2)}</p>
+                  <p className="font-heading font-bold text-lg text-price">¥{(item.price * item.qty).toFixed(2)}</p>
                   <button onClick={() => removeItem(i)} className="text-red-500 text-sm cursor-pointer hover:text-red-600 transition-colors">🗑️</button>
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function InquiryPage() {
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-sm text-text-secondary">Total Items: {totalQty}</p>
-                <p className="text-3xl font-heading font-bold text-price">${total.toFixed(2)}</p>
+                <p className="text-3xl font-heading font-bold text-price">¥{total.toFixed(2)}</p>
               </div>
               <button onClick={sendToWhatsApp} disabled={loading} className="px-8 py-3 bg-success text-white rounded-lg font-heading font-bold hover:shadow-lg transition-all disabled:opacity-50 cursor-pointer">
                 {loading ? '⏳ Generating...' : '💬 Send to WhatsApp'}

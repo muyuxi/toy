@@ -66,7 +66,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         {/* 价格显示 */}
         <div className="bg-gradient-to-r from-price to-red-400 rounded-lg p-5 mb-4">
           <p className="text-white text-sm mb-1 font-medium">Price</p>
-          <h3 className="text-4xl font-heading font-bold text-white">${color ? price.toFixed(2) : product.base_price.toFixed(2)}</h3>
+          <h3 className="text-4xl font-heading font-bold text-white">¥{color ? price.toFixed(2) : product.base_price.toFixed(2)}</h3>
           {!color && <p className="text-white text-xs mt-1 opacity-90">Base price (select color for total)</p>}
         </div>
 
@@ -92,7 +92,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   <label key={o.name} className="flex items-center gap-3 mb-2 cursor-pointer p-2 rounded hover:bg-background transition-all">
                     <input type="checkbox" onChange={(e) => setOptions(e.target.checked ? [...options, o.name] : options.filter(x => x !== o.name))} className="w-4 h-4 text-primary cursor-pointer" />
                     <span className="flex-1 text-text-primary">{o.name}</span>
-                    <span className="text-primary font-semibold">+${o.price.toFixed(2)}</span>
+                    <span className="text-primary font-semibold">+¥{o.price.toFixed(2)}</span>
                   </label>
                 ))}
               </div>

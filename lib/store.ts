@@ -34,11 +34,19 @@ interface Inquiry {
   created_at: string;
 }
 
+interface FAQ {
+  id: number;
+  question: string;
+  answer: string;
+}
+
 interface DataStore {
   products: Product[];
   inquiries: Inquiry[];
+  faqs: FAQ[];
   nextProductId: number;
   nextInquiryId: number;
+  nextFaqId: number;
 }
 
 // 初始化数据文件
@@ -47,8 +55,10 @@ function initDataFile() {
     const initialData: DataStore = {
       products: [],
       inquiries: [],
+      faqs: [],
       nextProductId: 1,
-      nextInquiryId: 1
+      nextInquiryId: 1,
+      nextFaqId: 1
     };
     fs.writeFileSync(DATA_FILE, JSON.stringify(initialData, null, 2));
   }
@@ -208,5 +218,35 @@ export const inquiriesStore = {
     data.inquiries = [];
     data.nextInquiryId = 1;
     writeData(data);
+  }
+};
+
+// FAQs API
+export const faqsStore = {
+  getAll() {
+    const data = readData();
+    return data.faqs || [];
+  },
+
+  create(question: string, answer: string) {
+    const data = readData();
+    if (!data.faqs) data.faqs = [];
+    if (!data.nextFaqId) data.nextFaqId = 1;
+    const newFaq: FAQ = {
+      id: data.nextFaqId++,
+      question,
+      answer
+    };
+    data.faqs.push(newFaq);
+    writeData(data);
+    return newFaq;
+  },
+
+  delete(id: number) {
+    const data = readData();
+    if (data.faqs) {
+      data.faqs = data.faqs.filter(f => f.id !== id);
+      writeData(data);
+    }
   }
 };
