@@ -70,7 +70,7 @@ export default function HomePage() {
       <header className="bg-card border-b border-border-light sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between mb-3">
-            <h1 className="text-xl font-heading font-semibold text-text-primary">Kids Ride-On Toys</h1>
+            <h1 className="text-xl font-heading font-semibold text-text-primary">Toy Car Factory</h1>
             <div className="flex items-center gap-4">
               <Link href="/faq" className="text-text-secondary hover:text-primary transition-colors text-sm font-medium">
                 ❓ FAQ
