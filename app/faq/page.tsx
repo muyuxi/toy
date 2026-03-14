@@ -16,7 +16,7 @@ export default function FAQPage() {
       <header className="bg-gradient-to-r from-primary to-primary-dark text-white sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-4">
           <button onClick={() => router.back()} className="text-white text-2xl cursor-pointer hover:opacity-80 transition-opacity">←</button>
-          <h1 className="text-xl font-heading font-bold">常见问题</h1>
+          <h1 className="text-xl font-heading font-bold">Frequently Asked Questions</h1>
         </div>
       </header>
 

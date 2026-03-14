@@ -9,6 +9,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [color, setColor] = useState('')
   const [options, setOptions] = useState<string[]>([])
   const [qty, setQty] = useState(1)
+  const [showOptions, setShowOptions] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -84,20 +85,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
         {color && (
           <>
-            {/* 配置选项 */}
-            {opts.length > 0 && (
-              <div className="bg-card rounded-lg p-4 mb-4 border border-border-light">
-                <h3 className="font-heading font-semibold mb-3 text-text-primary">Add Configurations</h3>
-                {opts.map((o: any) => (
-                  <label key={o.name} className="flex items-center gap-3 mb-2 cursor-pointer p-2 rounded hover:bg-background transition-all">
-                    <input type="checkbox" onChange={(e) => setOptions(e.target.checked ? [...options, o.name] : options.filter(x => x !== o.name))} className="w-4 h-4 text-primary cursor-pointer" />
-                    <span className="flex-1 text-text-primary">{o.name}</span>
-                    <span className="text-primary font-semibold">+¥{o.price.toFixed(2)}</span>
-                  </label>
-                ))}
-              </div>
-            )}
-
             {/* 规格参数 */}
             {(product.features || product.gw || product.dimensions) && (
               <div className="bg-card rounded-lg p-4 mb-4 border border-border-light">
@@ -110,6 +97,27 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   {product.cbm && <p><span className="font-medium text-text-secondary">Volume:</span> <span className="text-text-primary">{product.cbm}</span></p>}
                   {product.load_qty && <p><span className="font-medium text-text-secondary">Loading Qty:</span> <span className="text-text-primary">{product.load_qty}</span></p>}
                 </div>
+              </div>
+            )}
+
+            {/* 配置选项 */}
+            {opts.length > 0 && (
+              <div className="bg-card rounded-lg mb-4 border border-border-light">
+                <button onClick={() => setShowOptions(!showOptions)} className="w-full p-4 flex justify-between items-center hover:bg-background transition-colors">
+                  <h3 className="font-heading font-semibold text-text-primary">Add Configurations <span className="text-sm text-text-muted font-normal">(Optional)</span></h3>
+                  <span className="text-primary text-xl">{showOptions ? '−' : '+'}</span>
+                </button>
+                {showOptions && (
+                  <div className="px-4 pb-4">
+                    {opts.map((o: any) => (
+                      <label key={o.name} className="flex items-center gap-3 mb-2 cursor-pointer p-2 rounded hover:bg-background transition-all">
+                        <input type="checkbox" onChange={(e) => setOptions(e.target.checked ? [...options, o.name] : options.filter(x => x !== o.name))} className="w-4 h-4 text-primary cursor-pointer" />
+                        <span className="flex-1 text-text-primary">{o.name}</span>
+                        <span className="text-primary font-semibold">+¥{o.price.toFixed(2)}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 

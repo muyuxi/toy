@@ -160,9 +160,14 @@ export default function HomePage() {
         )}
       </main>
 
-      <Link href="/faq" className="fixed bottom-6 right-6 bg-white/90 backdrop-blur-sm text-primary w-16 py-2 rounded-2xl flex flex-col items-center justify-center shadow-lg z-30 hover:shadow-xl hover:bg-white transition-all cursor-pointer border border-border-light">
+      <Link href="/faq" className="fixed bottom-6 left-6 bg-white/90 backdrop-blur-sm text-primary w-16 py-2 rounded-2xl flex flex-col items-center justify-center shadow-lg z-30 hover:shadow-xl hover:bg-white transition-all cursor-pointer border border-border-light">
         <span className="text-2xl">❓</span>
         <span className="text-xs font-medium mt-1">FAQ</span>
+      </Link>
+
+      <Link href="/inquiry" className="fixed bottom-6 right-6 bg-white/90 backdrop-blur-sm text-primary w-16 py-2 rounded-2xl flex flex-col items-center justify-center shadow-lg z-30 hover:shadow-xl hover:bg-white transition-all cursor-pointer border border-border-light">
+        <span className="text-3xl">🛒</span>
+        {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">{cartCount}</span>}
       </Link>
     </div>
   )
