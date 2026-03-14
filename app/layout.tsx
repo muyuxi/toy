@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Kids Ride-On Toys - Electric Cars & Scooters',
+  title: 'Toy Car Factory',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
