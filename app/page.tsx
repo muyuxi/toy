@@ -21,7 +21,7 @@ export default function HomePage() {
       setAllProducts(data)
       setProducts(data.slice(0, 20))
 
-      const cats = [...new Set(data.map((p: any) => p.category).filter(Boolean))] as string[]
+      const cats = [...new Set(data.flatMap((p: any) => p.category?.split(',').map((c: string) => c.trim()) || []))] as string[]
       setCategories(cats)
 
       const cols = [...new Set(data.flatMap((p: any) => p.colors?.split(',').map((c: string) => c.trim()) || []))] as string[]
