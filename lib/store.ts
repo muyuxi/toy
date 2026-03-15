@@ -49,8 +49,8 @@ export const productsStore = {
         params.push(`%${filters.search}%`);
       }
       if (filters?.category && filters.category !== 'all') {
-        query += ' AND category = ?';
-        params.push(filters.category);
+        query += ' AND category LIKE ?';
+        params.push(`%${filters.category}%`);
       }
       if (filters?.color && filters.color !== 'all') {
         query += ' AND colors LIKE ?';
@@ -155,7 +155,11 @@ export const productsStore = {
     const conn = await pool.getConnection();
     try {
       const [rows] = await conn.query('SELECT DISTINCT category FROM products WHERE category IS NOT NULL AND category != ""');
-      return (rows as any[]).map(r => r.category);
+      const categories = new Set<string>();
+      (rows as any[]).forEach(r => {
+        r.category.split(',').forEach((c: string) => categories.add(c.trim()));
+      });
+      return Array.from(categories);
     } finally {
       conn.release();
     }
