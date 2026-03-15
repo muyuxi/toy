@@ -20,9 +20,9 @@ export async function POST(req: Request) {
     const colors = row['Colors']?.toString().replace(/\n/g, ',').trim() || ''
     const basePrice = parseFloat(row['Base_Price']?.toString() || '0')
 
-    // 解析配置选项（格式：Remote:20 LED-lights:12）
+    // 解析配置选项（格式：每行一个，如 Dual-drive 6v7:20）
     const optionsStr = row['Options']?.toString().trim() || ''
-    const options = optionsStr ? optionsStr.split(' ').filter(Boolean) : []
+    const options = optionsStr ? optionsStr.split(/\r?\n/).filter(Boolean) : []
 
     const existing = await productsStore.getByItemNo(itemNo)
     if (existing) {
