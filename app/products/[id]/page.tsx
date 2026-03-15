@@ -88,14 +88,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             {/* 规格参数 */}
             {(product.features || product.gw || product.dimensions) && (
               <div className="bg-card rounded-lg p-4 mb-4 border border-border-light">
-                <h3 className="font-heading font-semibold mb-3 text-text-primary">Specifications</h3>
-                <div className="space-y-2 text-sm">
-                  {product.features && <p><span className="font-medium text-text-secondary">Features:</span> <span className="text-text-primary whitespace-pre-wrap">{product.features}</span></p>}
-                  {product.gw && <p><span className="font-medium text-text-secondary">Gross Weight:</span> <span className="text-text-primary">{product.gw}</span></p>}
-                  {product.nw && <p><span className="font-medium text-text-secondary">Net Weight:</span> <span className="text-text-primary">{product.nw}</span></p>}
-                  {product.dimensions && <p><span className="font-medium text-text-secondary">Dimensions:</span> <span className="text-text-primary">{product.dimensions}</span></p>}
-                  {product.cbm && <p><span className="font-medium text-text-secondary">Volume:</span> <span className="text-text-primary">{product.cbm}</span></p>}
-                  {product.load_qty && <p><span className="font-medium text-text-secondary">Loading Qty:</span> <span className="text-text-primary">{product.load_qty}</span></p>}
+                <h3 className="font-heading font-bold mb-3 text-text-primary">Specifications</h3>
+                <div className="space-y-3 text-sm">
+                  {product.features && <div><p className="font-bold text-text-primary mb-1">Features:</p><p className="text-text-primary whitespace-pre-wrap">{product.features}</p></div>}
+                  {product.gw && <div><p className="font-bold text-text-primary mb-1">Gross Weight:</p><p className="text-text-primary whitespace-pre-wrap">{product.gw}</p></div>}
+                  {product.nw && <div><p className="font-bold text-text-primary mb-1">Net Weight:</p><p className="text-text-primary whitespace-pre-wrap">{product.nw}</p></div>}
+                  {product.dimensions && <div><p className="font-bold text-text-primary mb-1">Dimensions:</p><p className="text-text-primary whitespace-pre-wrap">{product.dimensions}</p></div>}
+                  {product.cbm && <div><p className="font-bold text-text-primary mb-1">Volume:</p><p className="text-text-primary whitespace-pre-wrap">{product.cbm}</p></div>}
+                  {product.load_qty && <div><p className="font-bold text-text-primary mb-1">Loading Qty:</p><p className="text-text-primary whitespace-pre-wrap">{product.load_qty}</p></div>}
                 </div>
               </div>
             )}
