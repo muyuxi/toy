@@ -49,7 +49,7 @@ export default function HomePage() {
 
   useEffect(() => {
     let filtered = allProducts
-    if (selectedCategory) filtered = filtered.filter(p => p.category === selectedCategory)
+    if (selectedCategory) filtered = filtered.filter(p => p.category?.includes(selectedCategory))
     if (selectedColor) filtered = filtered.filter(p => p.colors?.includes(selectedColor))
     if (searchQuery) filtered = filtered.filter(p => p.item_no?.toLowerCase().includes(searchQuery.toLowerCase()))
     setProducts(filtered.slice(0, page * 20))
