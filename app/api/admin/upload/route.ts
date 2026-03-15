@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       features: row['Features']?.toString().trim() || '',
       gw: row['GW']?.toString().trim() || '',
       nw: row['NW']?.toString().trim() || '',
-      dimensions: row['Dimensions']?.toString().replace(/\n/g, ' ').trim() || '',
+      dimensions: row['Dimensions']?.toString().trim() || '',
       cbm: row['CBM']?.toString().trim() || '',
       load_qty: row['Load_Qty']?.toString().trim() || ''
     })
