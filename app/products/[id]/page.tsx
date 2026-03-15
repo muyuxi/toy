@@ -27,9 +27,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   if (!product) return <div className="p-8">Loading...</div>
 
   const colors = product.colors?.split(',').map((c: string) => c.trim()) || []
-  const opts = product.options ? product.options.split('\n').filter(Boolean).map((o: string) => {
+  const opts = product.options ? product.options.split('|').filter(Boolean).map((o: string) => {
     const [name, price] = o.split(':')
-    return { name: name.trim(), price: parseFloat(price) }
+    return { name: name.trim(), price: parseFloat(price) || 0 }
   }) : []
 
   const price = color ? parseFloat(product.base_price) + opts.filter((o: any) => options.includes(o.name)).reduce((sum: number, o: any) => sum + o.price, 0) : 0
@@ -90,7 +90,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <div className="bg-card rounded-lg p-4 mb-4 border border-border-light">
                 <h3 className="font-heading font-semibold mb-3 text-text-primary">Specifications</h3>
                 <div className="space-y-2 text-sm">
-                  {product.features && <p><span className="font-medium text-text-secondary">Features:</span> <span className="text-text-primary">{product.features}</span></p>}
+                  {product.features && <p><span className="font-medium text-text-secondary">Features:</span> <span className="text-text-primary whitespace-pre-wrap">{product.features}</span></p>}
                   {product.gw && <p><span className="font-medium text-text-secondary">Gross Weight:</span> <span className="text-text-primary">{product.gw}</span></p>}
                   {product.nw && <p><span className="font-medium text-text-secondary">Net Weight:</span> <span className="text-text-primary">{product.nw}</span></p>}
                   {product.dimensions && <p><span className="font-medium text-text-secondary">Dimensions:</span> <span className="text-text-primary">{product.dimensions}</span></p>}

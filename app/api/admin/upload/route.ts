@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       base_price: basePrice,
       colors,
       options: options.join('|'),
-      features: row['Features']?.toString().replace(/\n/g, ' ').trim() || '',
+      features: row['Features']?.toString().trim() || '',
       gw: row['GW']?.toString().trim() || '',
       nw: row['NW']?.toString().trim() || '',
       dimensions: row['Dimensions']?.toString().replace(/\n/g, ' ').trim() || '',
